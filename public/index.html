@@ -30,6 +30,137 @@
     --font-mono:    'DM Mono', monospace;
   }
 
+  /* ═══ FULL PAGE OVERLAY SYSTEM ═══ */
+  .page-overlay {
+    position:fixed;inset:0;z-index:300;
+    background:#0f2d0a;
+    overflow-y:auto;
+    display:none;
+    animation:pageSlideIn 0.3s ease;
+  }
+  .page-overlay.active { display:block; }
+  @keyframes pageSlideIn {
+    from { opacity:0; transform:translateY(20px); }
+    to   { opacity:1; transform:translateY(0); }
+  }
+  .page-header {
+    position:sticky;top:0;z-index:10;
+    background:rgba(15,45,10,0.95);
+    backdrop-filter:blur(16px);
+    border-bottom:1px solid rgba(77,201,71,0.15);
+    padding:0 5vw;
+    height:64px;
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  .page-back {
+    display:flex;align-items:center;gap:8px;
+    color:rgba(255,255,255,0.7);font-size:0.88rem;font-weight:600;
+    cursor:pointer;background:none;border:none;
+    transition:color 0.2s;
+  }
+  .page-back:hover { color:var(--green-light); }
+  .page-content { padding:40px 5vw 80px; max-width:900px; margin:0 auto; }
+  .page-title {
+    font-size:clamp(1.6rem,3vw,2.4rem);font-weight:900;
+    color:white;letter-spacing:-0.02em;margin-bottom:6px;
+  }
+  .page-subtitle {
+    font-family:var(--font-hindi);color:rgba(255,255,255,0.6);
+    font-size:0.95rem;margin-bottom:32px;line-height:1.7;
+  }
+
+  /* Info cards */
+  .info-card {
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(255,255,255,0.1);
+    border-radius:16px;padding:20px 22px;margin-bottom:16px;
+    transition:all 0.25s;
+  }
+  .info-card:hover { background:rgba(77,201,71,0.08);border-color:rgba(77,201,71,0.3); }
+  .info-card h3 { color:var(--green-light);font-size:0.95rem;font-weight:700;margin-bottom:6px; }
+  .info-card p  { color:rgba(255,255,255,0.65);font-family:var(--font-hindi);font-size:0.85rem;line-height:1.7; }
+
+  /* Disease scanner UI */
+  .scan-drop {
+    border:2px dashed rgba(77,201,71,0.3);border-radius:20px;
+    padding:48px 24px;text-align:center;cursor:pointer;
+    transition:all 0.25s;background:rgba(77,201,71,0.04);
+    position:relative;
+  }
+  .scan-drop:hover,.scan-drop.drag-over {
+    border-color:rgba(77,201,71,0.7);background:rgba(77,201,71,0.1);
+  }
+  .scan-drop input[type=file] {
+    position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;
+  }
+
+  /* ═══ LOGIN MODAL ═══ */
+  .login-modal {
+    position:fixed;inset:0;z-index:400;
+    background:rgba(0,0,0,0.8);backdrop-filter:blur(12px);
+    display:none;align-items:center;justify-content:center;padding:20px;
+  }
+  .login-modal.active { display:flex; }
+  .login-box {
+    background:linear-gradient(160deg,#0f2d0a,#1a4d14);
+    border:1.5px solid rgba(77,201,71,0.2);
+    border-radius:24px;width:100%;max-width:400px;
+    overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,0.6);
+  }
+  .login-step { display:none; padding:32px; }
+  .login-step.active { display:block; }
+  .login-input {
+    width:100%;background:rgba(255,255,255,0.07);
+    border:1.5px solid rgba(255,255,255,0.15);border-radius:12px;
+    padding:13px 16px;color:white;font-size:0.95rem;
+    font-family:var(--font-hindi);outline:none;transition:border-color 0.2s;
+    box-sizing:border-box;
+  }
+  .login-input:focus { border-color:rgba(77,201,71,0.6); }
+  .login-input::placeholder { color:rgba(255,255,255,0.3); }
+  .login-btn {
+    width:100%;background:linear-gradient(135deg,#2d9a27,#4dc947);
+    color:white;border:none;border-radius:50px;padding:14px;
+    font-family:var(--font-display);font-weight:800;font-size:0.95rem;
+    cursor:pointer;transition:all 0.25s;margin-top:12px;
+  }
+  .login-btn:hover { transform:translateY(-2px);box-shadow:0 6px 24px rgba(45,154,39,0.4); }
+  .login-btn:disabled { opacity:0.5;cursor:not-allowed;transform:none; }
+  .otp-boxes { display:flex;gap:10px;justify-content:center;margin:20px 0; }
+  .otp-box {
+    width:48px;height:56px;background:rgba(255,255,255,0.07);
+    border:1.5px solid rgba(255,255,255,0.2);border-radius:12px;
+    text-align:center;font-size:1.4rem;font-weight:800;color:white;
+    outline:none;transition:all 0.2s;
+  }
+  .otp-box:focus { border-color:rgba(77,201,71,0.7);background:rgba(77,201,71,0.1); }
+
+  /* ═══ PROFILE PAGE ═══ */
+  .profile-avatar-wrap {
+    position:relative;width:100px;height:100px;
+    margin:0 auto 16px;cursor:pointer;
+  }
+  .profile-avatar {
+    width:100px;height:100px;border-radius:50%;
+    border:3px solid rgba(77,201,71,0.5);
+    background:linear-gradient(135deg,#1a4d14,#4dc947);
+    display:flex;align-items:center;justify-content:center;
+    font-size:2.5rem;overflow:hidden;object-fit:cover;
+  }
+  .profile-avatar-edit {
+    position:absolute;bottom:0;right:0;
+    width:32px;height:32px;background:#2d9a27;
+    border-radius:50%;display:flex;align-items:center;justify-content:center;
+    font-size:0.85rem;border:2px solid #0f2d0a;
+  }
+  .profile-field {
+    background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);
+    border-radius:12px;padding:14px 16px;margin-bottom:10px;
+    display:flex;justify-content:space-between;align-items:center;
+  }
+  .profile-field label { color:rgba(255,255,255,0.5);font-size:0.75rem;text-transform:uppercase;letter-spacing:0.06em; }
+  .profile-field span  { color:white;font-family:var(--font-hindi);font-size:0.88rem;font-weight:600; }
+
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   html { scroll-behavior: smooth; }
@@ -1108,12 +1239,20 @@
   </a>
   <ul class="nav-links">
     <li><a href="#features">Features</a></li>
-    <li><a href="#market">Mandi Prices</a></li>
+    <li><a href="#market">Mandi</a></li>
+    <li><a href="javascript:void(0)" onclick="openPage('disease')">🔬 रोग पहचान</a></li>
+    <li><a href="javascript:void(0)" onclick="openPage('weather')">🌦️ मौसम</a></li>
+    <li><a href="javascript:void(0)" onclick="openPage('iot')">📡 IoT</a></li>
+    <li><a href="javascript:void(0)" onclick="openPage('schemes')">🏛️ योजनाएँ</a></li>
     <li><a href="#blog">Blog</a></li>
-    <li><a href="#shop">🛒 Shop</a></li>
-    <li><a href="#social">Social</a></li>
-    <li><a href="#download" class="nav-cta">Download App <span class="nav-badge">Free</span></a></li>
+    <li><a href="javascript:void(0)" onclick="openLoginModal()" id="nav-login-btn" style="display:flex;align-items:center;gap:6px;">👤 Login</a></li>
+    <li><a href="#download" class="nav-cta">Download <span class="nav-badge">Free</span></a></li>
   </ul>
+  <!-- User avatar in nav (shown after login) -->
+  <div id="nav-user-avatar" style="display:none;align-items:center;gap:10px;cursor:pointer;" onclick="openPage('profile')">
+    <div id="nav-avatar-img" style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#2d9a27,#4dc947);display:flex;align-items:center;justify-content:center;font-size:1.1rem;border:2px solid rgba(77,201,71,0.5);overflow:hidden;"></div>
+    <span id="nav-user-name" style="color:white;font-size:0.82rem;font-weight:600;font-family:var(--font-hindi);"></span>
+  </div>
 </nav>
 
 <!-- MARQUEE -->
@@ -1983,101 +2122,49 @@
 </section>
 
 <!-- ===================== BIGHAAT AFFILIATE SHOP ===================== -->
-<section id="shop" style="background: linear-gradient(160deg, #fff8e1, #fffde7, #f1f8e9); padding: 100px 5vw;">
-  <div class="section-label" style="color: #e65100;">🛒 किसान की दुकान</div>
-  <h2 class="section-title reveal">Recommended <span>Farm Products</span></h2>
-  <p class="section-desc reveal reveal-delay-1">किसान AI द्वारा चुने गए बेस्ट प्रोडक्ट्स — BigHaat से खरीदें और हर ऑर्डर पर हमें support करें। आपकी खरीद से किसान AI का विकास होता है! 🙏</p>
+<section id="shop" style="background:linear-gradient(160deg,#0f2d0a,#1a4d14);padding:80px 5vw;position:relative;overflow:hidden;">
+  <!-- Grid bg -->
+  <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(77,201,71,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(77,201,71,0.04) 1px,transparent 1px);background-size:48px 48px;pointer-events:none;"></div>
 
-  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px;">
-
-    <!-- Product 1 -->
-    <div class="reveal" style="background: var(--white); border: 1.5px solid #ffe082; border-radius: 20px; overflow: hidden; transition: all 0.3s;" onmouseenter="this.style.transform='translateY(-5px)';this.style.boxShadow='0 12px 40px rgba(244,185,66,0.2)'" onmouseleave="this.style.transform='';this.style.boxShadow=''">
-      <div style="background: linear-gradient(135deg, #f9f3e3, #fff8e1); padding: 24px; text-align: center; border-bottom: 1px solid #ffe082;">
-        <div style="font-size: 3.5rem; margin-bottom: 8px;">🌾</div>
-        <span style="background: #e8f5e9; color: var(--green-dark); font-size: 0.68rem; font-weight: 700; padding: 3px 8px; border-radius: 10px;">Best Seller</span>
-      </div>
-      <div style="padding: 18px 20px;">
-        <h4 style="font-family: var(--font-hindi); font-size: 0.95rem; font-weight: 700; color: var(--ink); margin-bottom: 6px;">गेहूँ उच्च उपज बीज — HD-3086</h4>
-        <p style="font-family: var(--font-hindi); font-size: 0.78rem; color: var(--muted); margin-bottom: 12px; line-height: 1.5;">रोग-प्रतिरोधी, उच्च उपज देने वाली गेहूँ की किस्म। प्रति एकड़ 22-25 क्विंटल उत्पादन।</p>
-        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px;">
-          <span style="font-size: 1.1rem; font-weight: 800; color: var(--green-dark);">₹450</span>
-          <span style="font-size: 0.8rem; color: var(--muted); text-decoration: line-through;">₹600</span>
-          <span style="background: #fce4ec; color: #c62828; font-size: 0.68rem; font-weight: 700; padding: 2px 6px; border-radius: 8px;">25% OFF</span>
-        </div>
-        <div style="color: #f4b942; font-size: 0.75rem; margin-bottom: 12px;">★★★★★ <span style="color: var(--muted);">(4.8 — 2,341 reviews)</span></div>
-        <a href="https://bighaat.com" target="_blank" style="display: block; text-align: center; background: linear-gradient(135deg, var(--green-mid), var(--green-bright)); color: white; font-weight: 700; font-size: 0.88rem; padding: 10px; border-radius: 50px; text-decoration: none; transition: all 0.2s;" onmouseenter="this.style.opacity='0.9'" onmouseleave="this.style.opacity='1'">BigHaat पर खरीदें →</a>
-      </div>
+  <div style="position:relative;z-index:2;text-align:center;max-width:680px;margin:0 auto;">
+    <!-- Label -->
+    <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(244,185,66,0.12);border:1px solid rgba(244,185,66,0.3);border-radius:50px;padding:6px 16px;margin-bottom:24px;">
+      <span style="width:8px;height:8px;background:#f4b942;border-radius:50%;animation:pulse 1.5s infinite;display:inline-block;"></span>
+      <span style="color:#f4b942;font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;">🛒 किसान की दुकान</span>
     </div>
 
-    <!-- Product 2 -->
-    <div class="reveal reveal-delay-1" style="background: var(--white); border: 1.5px solid #ffe082; border-radius: 20px; overflow: hidden; transition: all 0.3s;" onmouseenter="this.style.transform='translateY(-5px)';this.style.boxShadow='0 12px 40px rgba(244,185,66,0.2)'" onmouseleave="this.style.transform='';this.style.boxShadow=''">
-      <div style="background: linear-gradient(135deg, #f3e5f5, #fce4ec); padding: 24px; text-align: center; border-bottom: 1px solid #ffe082;">
-        <div style="font-size: 3.5rem; margin-bottom: 8px;">🧪</div>
-        <span style="background: #e3f2fd; color: #0d47a1; font-size: 0.68rem; font-weight: 700; padding: 3px 8px; border-radius: 10px;">किसान AI Recommended</span>
-      </div>
-      <div style="padding: 18px 20px;">
-        <h4 style="font-family: var(--font-hindi); font-size: 0.95rem; font-weight: 700; color: var(--ink); margin-bottom: 6px;">मैन्कोज़ेब 75% WP — 500g</h4>
-        <p style="font-family: var(--font-hindi); font-size: 0.78rem; color: var(--muted); margin-bottom: 12px; line-height: 1.5;">पत्ती झुलसा और ब्लाइट के लिए सबसे प्रभावी फफूंदनाशक। AI-recommended treatment।</p>
-        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px;">
-          <span style="font-size: 1.1rem; font-weight: 800; color: var(--green-dark);">₹280</span>
-          <span style="font-size: 0.8rem; color: var(--muted); text-decoration: line-through;">₹350</span>
-          <span style="background: #fce4ec; color: #c62828; font-size: 0.68rem; font-weight: 700; padding: 2px 6px; border-radius: 8px;">20% OFF</span>
-        </div>
-        <div style="color: #f4b942; font-size: 0.75rem; margin-bottom: 12px;">★★★★★ <span style="color: var(--muted);">(4.7 — 1,892 reviews)</span></div>
-        <a href="https://bighaat.com" target="_blank" style="display: block; text-align: center; background: linear-gradient(135deg, var(--green-mid), var(--green-bright)); color: white; font-weight: 700; font-size: 0.88rem; padding: 10px; border-radius: 50px; text-decoration: none; transition: all 0.2s;">BigHaat पर खरीदें →</a>
-      </div>
+    <!-- Coming Soon heading -->
+    <h2 style="font-family:var(--font-display);font-size:clamp(2rem,4vw,3.2rem);font-weight:900;color:white;letter-spacing:-0.03em;margin-bottom:10px;">Coming <span style="color:#f4b942;">Soon</span> 🚀</h2>
+    <p style="font-family:var(--font-hindi);font-size:1rem;color:rgba(255,255,255,0.6);line-height:1.8;margin-bottom:36px;">
+      किसान AI का अपना Farm Store जल्द आ रहा है — बीज, खाद, कीटनाशक, उपकरण<br>सब कुछ एक जगह, सीधे किसान को, बेस्ट कीमत पर।
+    </p>
+
+    <!-- Feature pills -->
+    <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:40px;">
+      <span style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);color:rgba(255,255,255,0.7);padding:8px 16px;border-radius:20px;font-family:var(--font-hindi);font-size:0.82rem;">🌾 बीज</span>
+      <span style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);color:rgba(255,255,255,0.7);padding:8px 16px;border-radius:20px;font-family:var(--font-hindi);font-size:0.82rem;">🧪 खाद & कीटनाशक</span>
+      <span style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);color:rgba(255,255,255,0.7);padding:8px 16px;border-radius:20px;font-family:var(--font-hindi);font-size:0.82rem;">💧 सिंचाई उपकरण</span>
+      <span style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);color:rgba(255,255,255,0.7);padding:8px 16px;border-radius:20px;font-family:var(--font-hindi);font-size:0.82rem;">📡 IoT Sensors</span>
+      <span style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);color:rgba(255,255,255,0.7);padding:8px 16px;border-radius:20px;font-family:var(--font-hindi);font-size:0.82rem;">🌿 जैविक उत्पाद</span>
     </div>
 
-    <!-- Product 3 -->
-    <div class="reveal reveal-delay-2" style="background: var(--white); border: 1.5px solid #ffe082; border-radius: 20px; overflow: hidden; transition: all 0.3s;" onmouseenter="this.style.transform='translateY(-5px)';this.style.boxShadow='0 12px 40px rgba(244,185,66,0.2)'" onmouseleave="this.style.transform='';this.style.boxShadow=''">
-      <div style="background: linear-gradient(135deg, #e8f5e9, #f1f8e9); padding: 24px; text-align: center; border-bottom: 1px solid #ffe082;">
-        <div style="font-size: 3.5rem; margin-bottom: 8px;">💧</div>
-        <span style="background: #fff8e1; color: #7c5c00; font-size: 0.68rem; font-weight: 700; padding: 3px 8px; border-radius: 10px;">⚡ Flash Sale</span>
+    <!-- Notify CTA -->
+    <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:20px;padding:28px;max-width:460px;margin:0 auto;">
+      <div style="color:white;font-weight:700;font-size:0.95rem;margin-bottom:6px;">🔔 Launch पर सबसे पहले जानें</div>
+      <div style="color:rgba(255,255,255,0.5);font-family:var(--font-hindi);font-size:0.82rem;margin-bottom:18px;">अभी notify करें — launch पर special discount मिलेगा</div>
+      <div style="display:flex;gap:8px;">
+        <input type="tel" id="shop-notify-phone" placeholder="मोबाइल नंबर डालें" maxlength="10"
+          style="flex:1;background:rgba(255,255,255,0.08);border:1.5px solid rgba(255,255,255,0.15);border-radius:50px;padding:11px 18px;color:white;font-family:var(--font-hindi);font-size:0.85rem;outline:none;"
+          onfocus="this.style.borderColor='rgba(244,185,66,0.6)'" onblur="this.style.borderColor='rgba(255,255,255,0.15)'">
+        <button onclick="shopNotify()" style="background:linear-gradient(135deg,#f4b942,#e65100);color:white;border:none;border-radius:50px;padding:11px 20px;font-family:var(--font-display);font-weight:700;font-size:0.82rem;cursor:pointer;white-space:nowrap;transition:all 0.2s;" onmouseenter="this.style.transform='translateY(-2px)'" onmouseleave="this.style.transform=''">
+          Notify करें 🔔
+        </button>
       </div>
-      <div style="padding: 18px 20px;">
-        <h4 style="font-family: var(--font-hindi); font-size: 0.95rem; font-weight: 700; color: var(--ink); margin-bottom: 6px;">ड्रिप इरीगेशन किट — 1 एकड़</h4>
-        <p style="font-family: var(--font-hindi); font-size: 0.78rem; color: var(--muted); margin-bottom: 12px; line-height: 1.5;">पानी की 60% बचत करें। टमाटर, मिर्च, प्याज के लिए सबसे अच्छी irrigation system।</p>
-        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px;">
-          <span style="font-size: 1.1rem; font-weight: 800; color: var(--green-dark);">₹3,200</span>
-          <span style="font-size: 0.8rem; color: var(--muted); text-decoration: line-through;">₹4,500</span>
-          <span style="background: #fce4ec; color: #c62828; font-size: 0.68rem; font-weight: 700; padding: 2px 6px; border-radius: 8px;">29% OFF</span>
-        </div>
-        <div style="color: #f4b942; font-size: 0.75rem; margin-bottom: 12px;">★★★★☆ <span style="color: var(--muted);">(4.5 — 967 reviews)</span></div>
-        <a href="https://bighaat.com" target="_blank" style="display: block; text-align: center; background: linear-gradient(135deg, var(--green-mid), var(--green-bright)); color: white; font-weight: 700; font-size: 0.88rem; padding: 10px; border-radius: 50px; text-decoration: none; transition: all 0.2s;">BigHaat पर खरीदें →</a>
-      </div>
+      <div id="shop-notify-msg" style="display:none;color:#f4b942;font-family:var(--font-hindi);font-size:0.82rem;margin-top:10px;">✅ शुक्रिया! Launch होने पर आपको सूचित करेंगे।</div>
     </div>
-
-    <!-- Product 4 -->
-    <div class="reveal reveal-delay-1" style="background: var(--white); border: 1.5px solid #ffe082; border-radius: 20px; overflow: hidden; transition: all 0.3s;" onmouseenter="this.style.transform='translateY(-5px)';this.style.boxShadow='0 12px 40px rgba(244,185,66,0.2)'" onmouseleave="this.style.transform='';this.style.boxShadow=''">
-      <div style="background: linear-gradient(135deg, #e0f7fa, #b2ebf2); padding: 24px; text-align: center; border-bottom: 1px solid #ffe082;">
-        <div style="font-size: 3.5rem; margin-bottom: 8px;">🌿</div>
-        <span style="background: var(--green-pale); color: var(--green-dark); font-size: 0.68rem; font-weight: 700; padding: 3px 8px; border-radius: 10px;">Organic</span>
-      </div>
-      <div style="padding: 18px 20px;">
-        <h4 style="font-family: var(--font-hindi); font-size: 0.95rem; font-weight: 700; color: var(--ink); margin-bottom: 6px;">नीम खली — जैविक उर्वरक 5kg</h4>
-        <p style="font-family: var(--font-hindi); font-size: 0.78rem; color: var(--muted); margin-bottom: 12px; line-height: 1.5;">100% जैविक — मिट्टी को पोषण दे और कीट नियंत्रण भी करे। सभी फसलों के लिए उपयुक्त।</p>
-        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px;">
-          <span style="font-size: 1.1rem; font-weight: 800; color: var(--green-dark);">₹190</span>
-          <span style="font-size: 0.8rem; color: var(--muted); text-decoration: line-through;">₹240</span>
-          <span style="background: #fce4ec; color: #c62828; font-size: 0.68rem; font-weight: 700; padding: 2px 6px; border-radius: 8px;">21% OFF</span>
-        </div>
-        <div style="color: #f4b942; font-size: 0.75rem; margin-bottom: 12px;">★★★★★ <span style="color: var(--muted);">(4.9 — 3,120 reviews)</span></div>
-        <a href="https://bighaat.com" target="_blank" style="display: block; text-align: center; background: linear-gradient(135deg, var(--green-mid), var(--green-bright)); color: white; font-weight: 700; font-size: 0.88rem; padding: 10px; border-radius: 50px; text-decoration: none; transition: all 0.2s;">BigHaat पर खरीदें →</a>
-      </div>
-    </div>
-
-  </div>
-
-  <!-- BigHaat Banner -->
-  <div class="reveal" style="margin-top: 40px; background: linear-gradient(135deg, #e65100, #ff8f00); border-radius: 20px; padding: 28px 36px; display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap;">
-    <div>
-      <div style="color: rgba(255,255,255,0.7); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 4px;">Partner Store</div>
-      <h3 style="color: white; font-size: 1.3rem; font-weight: 800;">BigHaat पर 1000+ Farm Products</h3>
-      <p style="color: rgba(255,255,255,0.75); font-family: var(--font-hindi); font-size: 0.85rem; margin-top: 4px;">Seeds · Pesticides · Fertilizers · Tools · Equipment — सब एक जगह</p>
-    </div>
-    <a href="https://bighaat.com" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; background: white; color: #e65100; font-weight: 800; font-size: 0.95rem; padding: 13px 26px; border-radius: 50px; text-decoration: none; white-space: nowrap; transition: all 0.2s; box-shadow: 0 4px 16px rgba(0,0,0,0.2);" onmouseenter="this.style.transform='translateY(-2px)'" onmouseleave="this.style.transform=''">🛒 BigHaat पर जाएँ →</a>
   </div>
 </section>
+
 
 <!-- ===================== SOCIAL MEDIA SECTION ===================== -->
 <section id="social" style="background: var(--green-deep); padding: 100px 5vw; position: relative; overflow: hidden;">
@@ -2436,8 +2523,7 @@
       <h4>Resources</h4>
       <ul class="footer-links">
         <li><a href="#blog">📝 किसान ब्लॉग</a></li>
-        <li><a href="#shop">🛒 Farm Shop</a></li>
-        <li><a href="https://bighaat.com" target="_blank">🌾 BigHaat</a></li>
+        <li><a href="#shop">🛒 Coming Soon Shop</a></li>
         <li><a href="#">GitHub</a></li>
         <li><a href="#">API Setup</a></li>
       </ul>
@@ -2453,8 +2539,20 @@
       </ul>
     </div>
   </div>
+  <!-- Contact bar -->
+  <div style="border-top:1px solid rgba(255,255,255,0.06);padding:20px 0;margin-bottom:16px;display:flex;align-items:center;justify-content:center;gap:32px;flex-wrap:wrap;">
+    <a href="tel:+917078849719" style="display:flex;align-items:center;gap:8px;color:rgba(255,255,255,0.6);text-decoration:none;font-size:0.85rem;transition:color 0.2s;" onmouseenter="this.style.color='#4dc947'" onmouseleave="this.style.color='rgba(255,255,255,0.6)'">
+      <span style="font-size:1rem;">📞</span> +91 70788 49719
+    </a>
+    <a href="mailto:kisanai.support@gmail.com" style="display:flex;align-items:center;gap:8px;color:rgba(255,255,255,0.6);text-decoration:none;font-size:0.85rem;transition:color 0.2s;" onmouseenter="this.style.color='#4dc947'" onmouseleave="this.style.color='rgba(255,255,255,0.6)'">
+      <span style="font-size:1rem;">✉️</span> kisanai.support@gmail.com
+    </a>
+    <a href="https://kisanai-official.netlify.app" style="display:flex;align-items:center;gap:8px;color:rgba(255,255,255,0.6);text-decoration:none;font-size:0.85rem;transition:color 0.2s;" onmouseenter="this.style.color='#4dc947'" onmouseleave="this.style.color='rgba(255,255,255,0.6)'">
+      <span style="font-size:1rem;">🌐</span> kisanai-official.netlify.app
+    </a>
+  </div>
   <div class="footer-bottom">
-    <p>© 2025 किसान AI · MIT License · Made with ❤️ for Indian Farmers</p>
+    <p>© 2025 किसान AI · Made with ❤️ for Indian Farmers 🇮🇳</p>
     <div class="footer-flags">
       <span class="flag-chip">🌾 गेहूँ</span>
       <span class="flag-chip">🌾 धान</span>
@@ -4023,5 +4121,866 @@ window.addEventListener('load', () => {
   color:#ff8a80 !important;
 }
 </style>
+
+<!-- ═══════════════════════════════════════════════════════
+     LOGIN MODAL
+════════════════════════════════════════════════════════ -->
+<div class="login-modal" id="login-modal" onclick="if(event.target===this)closeLoginModal()">
+  <div class="login-box">
+    <!-- Header -->
+    <div style="background:linear-gradient(135deg,#0a1f07,#1a4d14);padding:24px 32px;display:flex;align-items:center;justify-content:space-between;">
+      <div>
+        <div style="color:white;font-weight:800;font-size:1rem;">🌾 किसान AI</div>
+        <div style="color:rgba(255,255,255,0.5);font-family:var(--font-hindi);font-size:0.78rem;margin-top:2px;">Login / Register करें</div>
+      </div>
+      <button onclick="closeLoginModal()" style="background:rgba(255,255,255,0.1);border:none;color:white;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:1rem;">✕</button>
+    </div>
+
+    <!-- Step 1: Phone number -->
+    <div class="login-step active" id="login-step-1">
+      <div style="font-family:var(--font-hindi);color:rgba(255,255,255,0.8);font-size:0.88rem;margin-bottom:20px;line-height:1.6;">
+        📱 अपना मोबाइल नंबर डालें — OTP से verify होगा
+      </div>
+      <div style="display:flex;gap:8px;margin-bottom:4px;">
+        <div style="background:rgba(255,255,255,0.07);border:1.5px solid rgba(255,255,255,0.15);border-radius:12px;padding:13px 14px;color:white;font-size:0.95rem;white-space:nowrap;">🇮🇳 +91</div>
+        <input class="login-input" type="tel" id="phone-input" placeholder="10 अंक का नंबर" maxlength="10" oninput="this.value=this.value.replace(/\D/g,'');checkPhone()" style="flex:1;">
+      </div>
+      <div id="phone-error" style="color:#ff8a80;font-family:var(--font-hindi);font-size:0.75rem;margin-bottom:8px;min-height:18px;"></div>
+      <button class="login-btn" id="send-otp-btn" onclick="sendOTP()" disabled>OTP भेजें 📨</button>
+      <div style="text-align:center;margin-top:16px;color:rgba(255,255,255,0.35);font-size:0.75rem;font-family:var(--font-hindi);">
+        Login करके आप हमारी Privacy Policy से सहमत हैं
+      </div>
+    </div>
+
+    <!-- Step 2: OTP -->
+    <div class="login-step" id="login-step-2">
+      <div style="font-family:var(--font-hindi);color:rgba(255,255,255,0.8);font-size:0.88rem;margin-bottom:6px;">
+        ✅ OTP भेजा गया: <b style="color:#4dc947;">+91 <span id="show-phone"></span></b>
+      </div>
+      <div style="font-family:var(--font-hindi);color:rgba(255,255,255,0.5);font-size:0.78rem;margin-bottom:20px;">6 अंक का OTP डालें</div>
+      <div class="otp-boxes">
+        <input class="otp-box" type="text" maxlength="1" id="otp1" oninput="otpNext(this,'otp2')" onkeydown="otpBack(event,this,'')">
+        <input class="otp-box" type="text" maxlength="1" id="otp2" oninput="otpNext(this,'otp3')" onkeydown="otpBack(event,this,'otp1')">
+        <input class="otp-box" type="text" maxlength="1" id="otp3" oninput="otpNext(this,'otp4')" onkeydown="otpBack(event,this,'otp2')">
+        <input class="otp-box" type="text" maxlength="1" id="otp4" oninput="otpNext(this,'otp5')" onkeydown="otpBack(event,this,'otp3')">
+        <input class="otp-box" type="text" maxlength="1" id="otp5" oninput="otpNext(this,'otp6')" onkeydown="otpBack(event,this,'otp4')">
+        <input class="otp-box" type="text" maxlength="1" id="otp6" oninput="otpNext(this,'')"    onkeydown="otpBack(event,this,'otp5')">
+      </div>
+      <div id="otp-error" style="color:#ff8a80;font-family:var(--font-hindi);font-size:0.75rem;text-align:center;min-height:18px;"></div>
+      <button class="login-btn" id="verify-btn" onclick="verifyOTP()">Verify करें ✅</button>
+      <div style="text-align:center;margin-top:14px;">
+        <button onclick="goBackToPhone()" style="background:none;border:none;color:rgba(255,255,255,0.4);font-family:var(--font-hindi);font-size:0.78rem;cursor:pointer;">← नंबर बदलें</button>
+        <span style="color:rgba(255,255,255,0.2);margin:0 8px;">|</span>
+        <button onclick="resendOTP()" id="resend-btn" style="background:none;border:none;color:#4dc947;font-family:var(--font-hindi);font-size:0.78rem;cursor:pointer;">OTP दोबारा भेजें</button>
+      </div>
+      <div id="otp-timer" style="text-align:center;color:rgba(255,255,255,0.35);font-size:0.72rem;margin-top:8px;font-family:var(--font-hindi);"></div>
+    </div>
+
+    <!-- Step 3: Profile setup -->
+    <div class="login-step" id="login-step-3">
+      <div style="font-family:var(--font-hindi);color:rgba(255,255,255,0.8);font-size:0.95rem;font-weight:700;margin-bottom:4px;">🎉 Welcome! अपनी profile बनाएँ</div>
+      <div style="font-family:var(--font-hindi);color:rgba(255,255,255,0.5);font-size:0.78rem;margin-bottom:20px;">यह बाद में भी बदल सकते हैं</div>
+      <!-- DP Upload -->
+      <div style="text-align:center;margin-bottom:20px;">
+        <div style="position:relative;width:80px;height:80px;margin:0 auto 10px;cursor:pointer;" onclick="document.getElementById('profile-dp-input').click()">
+          <div id="setup-avatar" style="width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,#1a4d14,#4dc947);display:flex;align-items:center;justify-content:center;font-size:2rem;border:3px solid rgba(77,201,71,0.4);overflow:hidden;">👨‍🌾</div>
+          <div style="position:absolute;bottom:0;right:0;width:26px;height:26px;background:#2d9a27;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.7rem;border:2px solid #0f2d0a;">📷</div>
+        </div>
+        <input type="file" id="profile-dp-input" accept="image/*" style="display:none;" onchange="handleDPUpload(this)">
+        <div style="color:rgba(255,255,255,0.4);font-family:var(--font-hindi);font-size:0.72rem;">Photo add करें (optional)</div>
+      </div>
+      <input class="login-input" type="text" id="name-input" placeholder="आपका नाम (हिंदी में)" style="margin-bottom:10px;">
+      <input class="login-input" type="text" id="village-input" placeholder="गाँव / शहर का नाम" style="margin-bottom:10px;">
+      <select id="state-input" class="login-input" style="margin-bottom:16px;cursor:pointer;">
+        <option value="">राज्य चुनें</option>
+        <option value="UP">उत्तर प्रदेश</option>
+        <option value="MP">मध्य प्रदेश</option>
+        <option value="Punjab">पंजाब</option>
+        <option value="Haryana">हरियाणा</option>
+        <option value="Maharashtra">महाराष्ट्र</option>
+        <option value="Bihar">बिहार</option>
+        <option value="Rajasthan">राजस्थान</option>
+        <option value="Gujarat">गुजरात</option>
+      </select>
+      <button class="login-btn" onclick="saveProfile()">Profile Save करें 🌾</button>
+    </div>
+  </div>
+</div>
+
+<!-- reCAPTCHA container for Firebase -->
+<div id="recaptcha-container" style="display:none;"></div>
+
+<!-- ═══════════════════════════════════════════════════════
+     PAGE: DISEASE DETECTION
+════════════════════════════════════════════════════════ -->
+<div class="page-overlay" id="page-disease">
+  <div class="page-header">
+    <button class="page-back" onclick="closePage('disease')">← वापस</button>
+    <div style="color:white;font-weight:800;font-size:0.95rem;">🔬 AI रोग पहचान</div>
+    <div style="width:60px;"></div>
+  </div>
+  <div class="page-content">
+    <h1 class="page-title">🔬 AI फसल रोग पहचान</h1>
+    <p class="page-subtitle">फोटो upload करें — किसान AI 3 सेकंड में रोग पहचान कर हिंदी में इलाज बताएगा</p>
+
+    <!-- Upload area -->
+    <div class="scan-drop" id="scan-drop-zone" onclick="document.getElementById('crop-img-input').click()">
+      <input type="file" id="crop-img-input" accept="image/*" onchange="analyzeCropImage(this)">
+      <div style="font-size:3rem;margin-bottom:12px;">📷</div>
+      <div style="color:white;font-family:var(--font-hindi);font-size:1rem;font-weight:700;margin-bottom:4px;">फसल की फोटो यहाँ डालें</div>
+      <div style="color:rgba(255,255,255,0.5);font-family:var(--font-hindi);font-size:0.82rem;">Click करें या drag & drop करें • JPG, PNG supported</div>
+    </div>
+
+    <!-- Preview + Result -->
+    <div id="disease-result" style="display:none;margin-top:24px;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start;">
+        <!-- Image preview -->
+        <div>
+          <div style="color:rgba(255,255,255,0.5);font-size:0.72rem;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px;">📸 Uploaded Image</div>
+          <img id="crop-preview" style="width:100%;border-radius:16px;border:2px solid rgba(77,201,71,0.2);" alt="crop">
+        </div>
+        <!-- Result card -->
+        <div id="disease-result-card" style="background:rgba(255,255,255,0.05);border:1px solid rgba(77,201,71,0.2);border-radius:16px;padding:20px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+            <div style="color:rgba(255,255,255,0.5);font-size:0.7rem;text-transform:uppercase;letter-spacing:0.06em;">AI Diagnosis</div>
+            <div style="background:rgba(77,201,71,0.15);color:#a8e063;font-size:0.62rem;font-weight:700;padding:3px 8px;border-radius:10px;border:1px solid rgba(77,201,71,0.3);">🤖 AI Diagnosed in 3s</div>
+          </div>
+          <div id="disease-name" style="color:white;font-family:var(--font-hindi);font-size:1.1rem;font-weight:800;margin-bottom:4px;"></div>
+          <div id="disease-name-en" style="color:var(--green-light);font-size:0.82rem;margin-bottom:14px;"></div>
+          <!-- Confidence bar -->
+          <div style="margin-bottom:14px;">
+            <div style="display:flex;justify-content:space-between;color:rgba(255,255,255,0.5);font-size:0.72rem;margin-bottom:5px;">
+              <span>Detection Confidence</span>
+              <span id="conf-pct" style="color:#4dc947;font-weight:800;"></span>
+            </div>
+            <div style="height:6px;background:rgba(255,255,255,0.1);border-radius:3px;overflow:hidden;">
+              <div id="conf-bar" style="height:100%;background:linear-gradient(90deg,#2d9a27,#4dc947);border-radius:3px;transition:width 1s ease;width:0%;"></div>
+            </div>
+          </div>
+          <!-- Treatment -->
+          <div style="color:rgba(255,255,255,0.4);font-size:0.65rem;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px;">💊 इलाज</div>
+          <div id="disease-treatment" style="font-family:var(--font-hindi);font-size:0.82rem;color:rgba(255,255,255,0.75);line-height:1.8;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Loading state -->
+    <div id="disease-loading" style="display:none;text-align:center;padding:40px;">
+      <div style="width:56px;height:56px;border:3px solid rgba(77,201,71,0.2);border-top-color:#4dc947;border-radius:50%;animation:spin 0.8s linear infinite;margin:0 auto 16px;"></div>
+      <div style="color:white;font-family:var(--font-hindi);font-size:0.95rem;font-weight:700;">AI रोग पहचान रहा है...</div>
+      <div style="color:rgba(255,255,255,0.5);font-family:var(--font-hindi);font-size:0.8rem;margin-top:4px;">3 सेकंड में result आएगा</div>
+    </div>
+
+    <!-- Common diseases list -->
+    <div style="margin-top:40px;">
+      <div style="color:rgba(255,255,255,0.5);font-size:0.75rem;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:16px;">📚 सामान्य रोग</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;">
+        <div class="info-card"><h3>🍂 पत्ती झुलसा (Leaf Blight)</h3><p>पत्तियों पर भूरे-काले धब्बे। मैन्कोज़ेब 75% WP (2 ग्राम/लीटर) छिड़कें।</p></div>
+        <div class="info-card"><h3>⬜ पाउडरी मिल्ड्यू</h3><p>सफेद पाउडर जैसा लेप। सल्फर 80% WP (3 ग्राम/लीटर) लगाएँ।</p></div>
+        <div class="info-card"><h3>💥 धान का ब्लास्ट</h3><p>हीरे के आकार के धब्बे। ट्राइसाइक्लाज़ोल 75% तुरंत छिड़कें।</p></div>
+        <div class="info-card"><h3>🔴 गेहूँ रस्ट</h3><p>नारंगी-लाल फफोले। Propiconazole 25% EC लगाएँ।</p></div>
+        <div class="info-card"><h3>🪰 सफेद मक्खी</h3><p>पत्तियाँ पीली पड़ती हैं। इमिडाक्लोप्रिड 17.8% SL छिड़कें।</p></div>
+        <div class="info-card"><h3>⚫ करनाल बंट</h3><p>बालियों में काला पाउडर। रोग-प्रतिरोधी किस्म PBW-343 बोएँ।</p></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     PAGE: WEATHER ADVISORY
+════════════════════════════════════════════════════════ -->
+<div class="page-overlay" id="page-weather">
+  <div class="page-header">
+    <button class="page-back" onclick="closePage('weather')">← वापस</button>
+    <div style="color:white;font-weight:800;font-size:0.95rem;">🌦️ मौसम सलाह</div>
+    <div style="width:60px;"></div>
+  </div>
+  <div class="page-content">
+    <h1 class="page-title">🌦️ Smart Weather Advisory</h1>
+    <p class="page-subtitle" id="weather-page-loc">आपके क्षेत्र का live मौसम और AI खेती सलाह</p>
+
+    <!-- Live weather card -->
+    <div style="background:linear-gradient(135deg,#020b18,#0d2137,#1a7abf);border-radius:20px;padding:28px;margin-bottom:24px;position:relative;overflow:hidden;">
+      <div style="position:absolute;top:-40px;right:-40px;font-size:8rem;opacity:0.07;">⛅</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;position:relative;z-index:2;">
+        <div>
+          <div style="color:rgba(255,255,255,0.6);font-family:var(--font-hindi);font-size:0.78rem;margin-bottom:6px;">📍 <span id="wp-city">लोकेशन लोड हो रही है...</span></div>
+          <div id="wp-temp" style="font-size:3.5rem;font-weight:900;color:white;line-height:1;">--°</div>
+          <div id="wp-desc" style="color:rgba(255,255,255,0.7);font-family:var(--font-hindi);font-size:0.88rem;margin-top:4px;">---</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;align-content:center;">
+          <div style="background:rgba(255,255,255,0.08);border-radius:12px;padding:12px;text-align:center;">
+            <div style="font-size:1.2rem;">💧</div>
+            <div id="wp-humidity" style="color:white;font-weight:800;font-size:1rem;margin:2px 0;">--%</div>
+            <div style="color:rgba(255,255,255,0.4);font-family:var(--font-hindi);font-size:0.62rem;">नमी</div>
+          </div>
+          <div style="background:rgba(255,255,255,0.08);border-radius:12px;padding:12px;text-align:center;">
+            <div style="font-size:1.2rem;">💨</div>
+            <div id="wp-wind" style="color:white;font-weight:800;font-size:1rem;margin:2px 0;">-- km/h</div>
+            <div style="color:rgba(255,255,255,0.4);font-family:var(--font-hindi);font-size:0.62rem;">हवा</div>
+          </div>
+          <div style="background:rgba(255,255,255,0.08);border-radius:12px;padding:12px;text-align:center;">
+            <div style="font-size:1.2rem;">🌡️</div>
+            <div id="wp-feels" style="color:white;font-weight:800;font-size:1rem;margin:2px 0;">--°</div>
+            <div style="color:rgba(255,255,255,0.4);font-family:var(--font-hindi);font-size:0.62rem;">feels like</div>
+          </div>
+          <div style="background:rgba(255,255,255,0.08);border-radius:12px;padding:12px;text-align:center;">
+            <div style="font-size:1.2rem;">☁️</div>
+            <div id="wp-clouds" style="color:white;font-weight:800;font-size:1rem;margin:2px 0;">--%</div>
+            <div style="color:rgba(255,255,255,0.4);font-family:var(--font-hindi);font-size:0.62rem;">बादल</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5 day forecast -->
+    <div style="margin-bottom:24px;">
+      <div style="color:rgba(255,255,255,0.5);font-size:0.72rem;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:12px;">📅 5-दिन Forecast</div>
+      <div id="wp-forecast" style="display:flex;gap:10px;overflow-x:auto;padding-bottom:8px;"></div>
+    </div>
+
+    <!-- AI Advisory -->
+    <div style="background:rgba(77,201,71,0.08);border:1px solid rgba(77,201,71,0.2);border-radius:16px;padding:20px;">
+      <div style="color:var(--green-light);font-family:var(--font-hindi);font-size:0.9rem;font-weight:700;margin-bottom:14px;">🤖 AI खेती सलाह — आज के लिए</div>
+      <div id="wp-advisory" style="display:flex;flex-direction:column;gap:8px;">
+        <div style="color:rgba(255,255,255,0.5);font-family:var(--font-hindi);font-size:0.82rem;">⏳ मौसम data load हो रहा है...</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     PAGE: IoT SENSORS
+════════════════════════════════════════════════════════ -->
+<div class="page-overlay" id="page-iot">
+  <div class="page-header">
+    <button class="page-back" onclick="closePage('iot')">← वापस</button>
+    <div style="color:white;font-weight:800;font-size:0.95rem;">📡 IoT Dashboard</div>
+    <div style="width:60px;"></div>
+  </div>
+  <div class="page-content">
+    <h1 class="page-title">📡 IoT Sensor Dashboard</h1>
+    <p class="page-subtitle">अपने खेत के sensors का real-time data — मिट्टी, तापमान, नमी सब एक जगह</p>
+
+    <!-- Live sensor cards -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin-bottom:32px;">
+      <div style="background:linear-gradient(135deg,rgba(77,201,71,0.15),rgba(77,201,71,0.05));border:1px solid rgba(77,201,71,0.25);border-radius:16px;padding:20px;text-align:center;">
+        <div style="font-size:2rem;margin-bottom:8px;">💧</div>
+        <div id="iot-moisture" style="font-size:2rem;font-weight:900;color:#4dc947;">68%</div>
+        <div style="font-family:var(--font-hindi);color:rgba(255,255,255,0.5);font-size:0.72rem;margin-top:4px;">मिट्टी नमी</div>
+        <div style="font-size:0.65rem;color:#a8e063;margin-top:4px;">✅ सामान्य</div>
+      </div>
+      <div style="background:linear-gradient(135deg,rgba(244,185,66,0.15),rgba(244,185,66,0.05));border:1px solid rgba(244,185,66,0.25);border-radius:16px;padding:20px;text-align:center;">
+        <div style="font-size:2rem;margin-bottom:8px;">🌡️</div>
+        <div id="iot-temp" style="font-size:2rem;font-weight:900;color:#f4b942;">28°C</div>
+        <div style="font-family:var(--font-hindi);color:rgba(255,255,255,0.5);font-size:0.72rem;margin-top:4px;">मिट्टी तापमान</div>
+        <div style="font-size:0.65rem;color:#f4b942;margin-top:4px;">⚠️ थोड़ा गर्म</div>
+      </div>
+      <div style="background:linear-gradient(135deg,rgba(26,122,191,0.15),rgba(26,122,191,0.05));border:1px solid rgba(26,122,191,0.25);border-radius:16px;padding:20px;text-align:center;">
+        <div style="font-size:2rem;margin-bottom:8px;">🧪</div>
+        <div id="iot-ph" style="font-size:2rem;font-weight:900;color:#90caf9;">6.8</div>
+        <div style="font-family:var(--font-hindi);color:rgba(255,255,255,0.5);font-size:0.72rem;margin-top:4px;">मिट्टी pH</div>
+        <div style="font-size:0.65rem;color:#90caf9;margin-top:4px;">✅ उचित range</div>
+      </div>
+      <div style="background:linear-gradient(135deg,rgba(206,147,216,0.15),rgba(206,147,216,0.05));border:1px solid rgba(206,147,216,0.25);border-radius:16px;padding:20px;text-align:center;">
+        <div style="font-size:2rem;margin-bottom:8px;">☀️</div>
+        <div id="iot-light" style="font-size:2rem;font-weight:900;color:#ce93d8;">4200</div>
+        <div style="font-family:var(--font-hindi);color:rgba(255,255,255,0.5);font-size:0.72rem;margin-top:4px;">प्रकाश (lux)</div>
+        <div style="font-size:0.65rem;color:#a8e063;margin-top:4px;">✅ पर्याप्त</div>
+      </div>
+    </div>
+
+    <!-- Sensor info cards -->
+    <div style="color:rgba(255,255,255,0.5);font-size:0.72rem;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:14px;">📋 Sensor Setup Guide</div>
+    <div class="info-card"><h3>📡 Soil Moisture Sensor</h3><p>मिट्टी की नमी माप — FC-28 या Capacitive sensor खेत में 15-20 सेमी गहराई पर लगाएँ। किसान AI app से connect करें।</p></div>
+    <div class="info-card"><h3>🌡️ Temperature Sensor (DHT22)</h3><p>मिट्टी और हवा का तापमान। DHT22 sensor छाँव में लगाएँ। Data हर 15 minute में update होता है।</p></div>
+    <div class="info-card"><h3>🧪 pH Sensor</h3><p>मिट्टी की अम्लता जाँचें। Ideal range 6.0-7.5। इससे कम हो तो चूना, ज़्यादा हो तो गंधक मिलाएँ।</p></div>
+    <div class="info-card"><h3>🔧 Setup कैसे करें</h3><p>Arduino / ESP32 से sensors connect करें → किसान AI app mein IoT section खोलें → Device pair करें → Real-time data देखें।</p></div>
+
+    <!-- Animate sensor values -->
+    <script>
+    function animateIoT() {
+      const fluctuate = (base, range) => (base + (Math.random()-0.5)*range).toFixed(1);
+      setInterval(() => {
+        document.getElementById('iot-moisture') && (document.getElementById('iot-moisture').textContent = Math.round(fluctuate(68,4)) + '%');
+        document.getElementById('iot-temp')     && (document.getElementById('iot-temp').textContent = fluctuate(28,1.5) + '°C');
+        document.getElementById('iot-ph')       && (document.getElementById('iot-ph').textContent = fluctuate(6.8,0.2));
+        document.getElementById('iot-light')    && (document.getElementById('iot-light').textContent = Math.round(fluctuate(4200,300)));
+      }, 3000);
+    }
+    animateIoT();
+    </script>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     PAGE: GOVERNMENT SCHEMES
+════════════════════════════════════════════════════════ -->
+<div class="page-overlay" id="page-schemes">
+  <div class="page-header">
+    <button class="page-back" onclick="closePage('schemes')">← वापस</button>
+    <div style="color:white;font-weight:800;font-size:0.95rem;">🏛️ सरकारी योजनाएँ</div>
+    <div style="width:60px;"></div>
+  </div>
+  <div class="page-content">
+    <h1 class="page-title">🏛️ किसान सरकारी योजनाएँ 2025</h1>
+    <p class="page-subtitle">UP और केंद्र सरकार की सभी किसान योजनाएँ — आवेदन कैसे करें, क्या मिलेगा</p>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;">
+      <div class="info-card" style="border-left:4px solid #f4b942;">
+        <h3>💰 PM-KISAN सम्मान निधि</h3>
+        <p>हर साल ₹6,000 (3 किस्त) सीधे bank में। pmkisan.gov.in पर apply करें। आधार + खसरा ज़रूरी।</p>
+        <a href="https://pmkisan.gov.in" target="_blank" style="color:#4dc947;font-size:0.78rem;text-decoration:none;font-weight:700;">→ Apply करें</a>
+      </div>
+      <div class="info-card" style="border-left:4px solid #90caf9;">
+        <h3>🛡️ PM फसल बीमा योजना</h3>
+        <p>₹72,000/हेक्टेयर तक coverage। बहुत कम premium। pmfby.gov.in पर बुवाई से 2 सप्ताह में apply करें।</p>
+        <a href="https://pmfby.gov.in" target="_blank" style="color:#4dc947;font-size:0.78rem;text-decoration:none;font-weight:700;">→ Apply करें</a>
+      </div>
+      <div class="info-card" style="border-left:4px solid #4dc947;">
+        <h3>💳 Kisan Credit Card (KCC)</h3>
+        <p>4% ब्याज पर ₹3 लाख तक। नज़दीकी SBI/PNB में apply करें। 2 हफ्ते में card मिलता है।</p>
+        <a href="https://www.sbi.co.in" target="_blank" style="color:#4dc947;font-size:0.78rem;text-decoration:none;font-weight:700;">→ Apply करें</a>
+      </div>
+      <div class="info-card" style="border-left:4px solid #ce93d8;">
+        <h3>☀️ PM-KUSUM सोलर पंप</h3>
+        <p>60-90% subsidy पर solar pump। बिजली बिल ₹0। UP Agri Dept. में register करें।</p>
+        <a href="https://www.upagripardarshi.gov.in" target="_blank" style="color:#4dc947;font-size:0.78rem;text-decoration:none;font-weight:700;">→ Apply करें</a>
+      </div>
+      <div class="info-card" style="border-left:4px solid #ff8a80;">
+        <h3>💧 PM कृषि सिंचाई योजना</h3>
+        <p>Drip/Sprinkler पर 40-90% subsidy। पानी की 60% बचत। ऑनलाइन UP portal पर apply।</p>
+        <a href="https://pmksy.gov.in" target="_blank" style="color:#4dc947;font-size:0.78rem;text-decoration:none;font-weight:700;">→ Apply करें</a>
+      </div>
+      <div class="info-card" style="border-left:4px solid #f4b942;">
+        <h3>🌾 e-NAM Online Mandi</h3>
+        <p>घर बैठे पूरे देश की मंडी में बेचें। enam.gov.in पर register करें। बेहतर भाव + कम commission।</p>
+        <a href="https://enam.gov.in" target="_blank" style="color:#4dc947;font-size:0.78rem;text-decoration:none;font-weight:700;">→ Register करें</a>
+      </div>
+      <div class="info-card" style="border-left:4px solid #4dc947;">
+        <h3>🌱 जैविक खेती प्रोत्साहन</h3>
+        <p>Organic farming पर ₹10,000/हेक्टेयर। 3 साल का contract। UP Agriculture Dept. में register।</p>
+        <a href="https://www.upagripardarshi.gov.in" target="_blank" style="color:#4dc947;font-size:0.78rem;text-decoration:none;font-weight:700;">→ Apply करें</a>
+      </div>
+      <div class="info-card" style="border-left:4px solid #90caf9;">
+        <h3>🎓 Kisan Pathshala (KVK)</h3>
+        <p>नई technology और जैविक खेती की free training। नज़दीकी KVK में register करें।</p>
+        <a href="https://icar.org.in" target="_blank" style="color:#4dc947;font-size:0.78rem;text-decoration:none;font-weight:700;">→ Register करें</a>
+      </div>
+    </div>
+
+    <!-- Helpline -->
+    <div style="background:rgba(77,201,71,0.08);border:1px solid rgba(77,201,71,0.2);border-radius:16px;padding:20px;margin-top:24px;text-align:center;">
+      <div style="font-family:var(--font-hindi);color:white;font-size:1rem;font-weight:700;margin-bottom:6px;">📞 Kisan Call Center</div>
+      <div style="font-size:1.5rem;font-weight:900;color:#4dc947;letter-spacing:0.05em;">1800-180-1551</div>
+      <div style="font-family:var(--font-hindi);color:rgba(255,255,255,0.5);font-size:0.78rem;margin-top:4px;">सोमवार-शनिवार, सुबह 6 बजे से रात 10 बजे तक — बिल्कुल Free</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     PAGE: PROFILE
+════════════════════════════════════════════════════════ -->
+<div class="page-overlay" id="page-profile">
+  <div class="page-header">
+    <button class="page-back" onclick="closePage('profile')">← वापस</button>
+    <div style="color:white;font-weight:800;font-size:0.95rem;">👤 My Profile</div>
+    <button onclick="logoutUser()" style="background:rgba(229,57,53,0.15);border:1px solid rgba(229,57,53,0.3);color:#ff8a80;font-size:0.72rem;padding:5px 12px;border-radius:20px;cursor:pointer;font-family:var(--font-hindi);">Logout</button>
+  </div>
+  <div class="page-content" style="max-width:500px;">
+    <!-- Avatar -->
+    <div style="text-align:center;margin-bottom:28px;">
+      <div class="profile-avatar-wrap" onclick="document.getElementById('profile-change-dp').click()">
+        <div class="profile-avatar" id="profile-big-avatar">👨‍🌾</div>
+        <div class="profile-avatar-edit">📷</div>
+      </div>
+      <input type="file" id="profile-change-dp" accept="image/*" style="display:none;" onchange="changeDP(this)">
+      <div id="profile-display-name" style="color:white;font-family:var(--font-hindi);font-size:1.2rem;font-weight:800;margin-top:10px;"></div>
+      <div id="profile-display-phone" style="color:rgba(255,255,255,0.5);font-size:0.82rem;margin-top:2px;"></div>
+    </div>
+
+    <!-- Profile fields -->
+    <div id="profile-fields"></div>
+
+    <!-- Edit form -->
+    <div style="margin-top:20px;">
+      <input class="login-input" type="text" id="edit-name" placeholder="नाम" style="margin-bottom:10px;">
+      <input class="login-input" type="text" id="edit-village" placeholder="गाँव/शहर" style="margin-bottom:10px;">
+      <select id="edit-state" class="login-input" style="margin-bottom:16px;cursor:pointer;">
+        <option value="">राज्य चुनें</option>
+        <option value="UP">उत्तर प्रदेश</option>
+        <option value="MP">मध्य प्रदेश</option>
+        <option value="Punjab">पंजाब</option>
+        <option value="Haryana">हरियाणा</option>
+        <option value="Maharashtra">महाराष्ट्र</option>
+        <option value="Bihar">बिहार</option>
+      </select>
+      <button class="login-btn" onclick="updateProfile()">Profile Update करें ✅</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- Firebase SDK -->
+<script type="module">
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+import { getAuth, RecaptchaVerifier, signInWithPhoneNumber, signOut } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
+
+// ── Firebase Config — Replace with YOUR config from Firebase Console ──
+// Go to: console.firebase.google.com → New Project → Authentication → Phone
+// → Project Settings → Add Web App → Copy config
+const firebaseConfig = {
+  apiKey:            "AIzaSyD-REPLACE-WITH-YOUR-KEY",
+  authDomain:        "kisanai-YOURPROJECT.firebaseapp.com",
+  projectId:         "kisanai-YOURPROJECT",
+  storageBucket:     "kisanai-YOURPROJECT.appspot.com",
+  messagingSenderId: "123456789",
+  appId:             "1:123456789:web:abcdef"
+};
+
+const app  = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+auth.languageCode = 'hi';
+
+let confirmationResult = null;
+let otpTimer = null;
+
+// ── Make functions global ──────────────────────────────────────
+window._fbAuth = auth;
+
+window.sendOTP = async function() {
+  const phone = document.getElementById('phone-input').value.trim();
+  if (phone.length !== 10) return;
+  const fullPhone = '+91' + phone;
+  const btn = document.getElementById('send-otp-btn');
+  btn.disabled = true;
+  btn.textContent = '⏳ भेज रहे हैं...';
+  document.getElementById('phone-error').textContent = '';
+
+  try {
+    // Setup reCAPTCHA
+    if (!window.recaptchaVerifier) {
+      window.recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
+        size: 'invisible',
+        callback: () => {},
+      });
+    }
+    confirmationResult = await signInWithPhoneNumber(auth, fullPhone, window.recaptchaVerifier);
+    // Go to OTP step
+    document.getElementById('login-step-1').classList.remove('active');
+    document.getElementById('login-step-2').classList.add('active');
+    document.getElementById('show-phone').textContent = phone;
+    document.getElementById('otp1').focus();
+    startOTPTimer(30);
+  } catch(e) {
+    document.getElementById('phone-error').textContent = '❌ OTP नहीं भेजा जा सका। Firebase config check करें।';
+    btn.disabled = false;
+    btn.textContent = 'OTP भेजें 📨';
+    // DEMO MODE: bypass for testing
+    if (e.code === 'auth/invalid-api-key' || e.message.includes('REPLACE')) {
+      demoLogin(phone);
+    }
+  }
+};
+
+window.verifyOTP = async function() {
+  const otp = ['otp1','otp2','otp3','otp4','otp5','otp6'].map(id => document.getElementById(id)?.value || '').join('');
+  if (otp.length !== 6) { document.getElementById('otp-error').textContent = '6 अंक का OTP डालें'; return; }
+  const btn = document.getElementById('verify-btn');
+  btn.disabled = true; btn.textContent = '⏳ Verify हो रहा है...';
+  document.getElementById('otp-error').textContent = '';
+
+  try {
+    const result = await confirmationResult.confirm(otp);
+    const user = result.user;
+    const phone = document.getElementById('phone-input').value;
+    // Save to localStorage
+    const profile = JSON.parse(localStorage.getItem('kisanai_user') || '{}');
+    if (!profile.phone) {
+      // New user — go to profile setup
+      localStorage.setItem('kisanai_user', JSON.stringify({ phone, uid: user.uid, isNew: true }));
+      document.getElementById('login-step-2').classList.remove('active');
+      document.getElementById('login-step-3').classList.add('active');
+    } else {
+      // Existing user
+      onLoginSuccess(profile);
+    }
+  } catch(e) {
+    document.getElementById('otp-error').textContent = '❌ OTP गलत है। फिर try करें।';
+    btn.disabled = false; btn.textContent = 'Verify करें ✅';
+  }
+};
+
+window.resendOTP = function() {
+  document.getElementById('login-step-2').classList.remove('active');
+  document.getElementById('login-step-1').classList.add('active');
+  document.getElementById('send-otp-btn').disabled = false;
+  document.getElementById('send-otp-btn').textContent = 'OTP भेजें 📨';
+  if (otpTimer) clearInterval(otpTimer);
+};
+
+window.logoutUser = function() {
+  signOut(auth).catch(()=>{});
+  localStorage.removeItem('kisanai_user');
+  updateNavForLogout();
+  closePage('profile');
+  showToast('✅ Logout हो गए!');
+};
+
+// ── Demo login (when Firebase not configured) ─────────────────
+window.demoLogin = function(phone) {
+  document.getElementById('login-step-1').classList.remove('active');
+  document.getElementById('login-step-2').classList.add('active');
+  document.getElementById('show-phone').textContent = phone || '9999999999';
+  // Pre-fill OTP for demo
+  setTimeout(() => {
+    ['otp1','otp2','otp3','otp4','otp5','otp6'].forEach((id,i) => {
+      const el = document.getElementById(id);
+      if (el) el.value = String(i+1);
+    });
+    document.getElementById('otp-error').textContent = '⚠️ Demo mode — Firebase config add karo';
+  }, 500);
+
+  // Override verifyOTP for demo
+  window.verifyOTP = function() {
+    const phone = document.getElementById('phone-input').value || '9999999999';
+    const profile = { phone, name:'', village:'', state:'' };
+    localStorage.setItem('kisanai_user', JSON.stringify({ ...profile, isNew: true }));
+    document.getElementById('login-step-2').classList.remove('active');
+    document.getElementById('login-step-3').classList.add('active');
+  };
+};
+</script>
+
+<!-- ── Main Page/Login JS (non-module) ── -->
+<script>
+// ══ PAGE NAVIGATION ══════════════════════════════════════════
+function openPage(name) {
+  document.body.style.overflow = 'hidden';
+  const el = document.getElementById('page-' + name);
+  if (!el) return;
+  el.classList.add('active');
+  // Load page-specific data
+  if (name === 'weather') loadWeatherPage();
+  if (name === 'profile') loadProfilePage();
+}
+function closePage(name) {
+  const el = document.getElementById('page-' + name);
+  if (el) el.classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+// Close pages with ESC key
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    document.querySelectorAll('.page-overlay.active').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.login-modal.active').forEach(m => m.classList.remove('active'));
+    document.body.style.overflow = '';
+  }
+});
+
+// ══ LOGIN MODAL ════════════════════════════════════════════════
+function openLoginModal() {
+  const user = JSON.parse(localStorage.getItem('kisanai_user') || 'null');
+  if (user && user.phone) {
+    openPage('profile');
+    return;
+  }
+  document.getElementById('login-modal').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+function closeLoginModal() {
+  document.getElementById('login-modal').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+// Phone validation
+function checkPhone() {
+  const v = document.getElementById('phone-input').value;
+  const btn = document.getElementById('send-otp-btn');
+  btn.disabled = v.length !== 10;
+}
+
+// OTP box navigation
+function otpNext(el, nextId) {
+  el.value = el.value.replace(/\D/g,'');
+  if (el.value && nextId) document.getElementById(nextId)?.focus();
+}
+function otpBack(e, el, prevId) {
+  if (e.key === 'Backspace' && !el.value && prevId) document.getElementById(prevId)?.focus();
+}
+function goBackToPhone() {
+  document.getElementById('login-step-2').classList.remove('active');
+  document.getElementById('login-step-1').classList.add('active');
+}
+function startOTPTimer(sec) {
+  if (otpTimer) clearInterval(otpTimer);
+  let s = sec;
+  const el = document.getElementById('otp-timer');
+  otpTimer = setInterval(() => {
+    if (el) el.textContent = s > 0 ? `OTP ${s} सेकंड में expire होगा` : '';
+    if (s-- <= 0) clearInterval(otpTimer);
+  }, 1000);
+}
+
+// ── DP Upload ─────────────────────────────────────────────────
+function handleDPUpload(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    const avatarEl = document.getElementById('setup-avatar');
+    if (avatarEl) {
+      avatarEl.innerHTML = '';
+      const img = document.createElement('img');
+      img.src = e.target.result;
+      img.style.cssText = 'width:100%;height:100%;object-fit:cover;border-radius:50%;';
+      avatarEl.appendChild(img);
+    }
+    localStorage.setItem('kisanai_dp', e.target.result);
+  };
+  reader.readAsDataURL(file);
+}
+
+function changeDP(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    localStorage.setItem('kisanai_dp', e.target.result);
+    updateAllAvatars(e.target.result);
+  };
+  reader.readAsDataURL(file);
+}
+
+function updateAllAvatars(dp) {
+  const avatarEls = ['profile-big-avatar','nav-avatar-img','setup-avatar'];
+  avatarEls.forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    if (dp && dp.startsWith('data:image')) {
+      el.innerHTML = `<img src="${dp}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">`;
+    } else {
+      el.textContent = '👨‍🌾';
+    }
+  });
+}
+
+// ── Save Profile ──────────────────────────────────────────────
+function saveProfile() {
+  const existing = JSON.parse(localStorage.getItem('kisanai_user') || '{}');
+  const dp = localStorage.getItem('kisanai_dp') || '';
+  const profile = {
+    ...existing,
+    name:    document.getElementById('name-input')?.value.trim() || '',
+    village: document.getElementById('village-input')?.value.trim() || '',
+    state:   document.getElementById('state-input')?.value || '',
+    dp,
+    isNew: false,
+  };
+  localStorage.setItem('kisanai_user', JSON.stringify(profile));
+  onLoginSuccess(profile);
+}
+
+function updateProfile() {
+  const existing = JSON.parse(localStorage.getItem('kisanai_user') || '{}');
+  const profile = {
+    ...existing,
+    name:    document.getElementById('edit-name')?.value.trim() || existing.name,
+    village: document.getElementById('edit-village')?.value.trim() || existing.village,
+    state:   document.getElementById('edit-state')?.value || existing.state,
+  };
+  localStorage.setItem('kisanai_user', JSON.stringify(profile));
+  loadProfilePage();
+  showToast('✅ Profile update हो गई!');
+}
+
+// ── On Login Success ──────────────────────────────────────────
+function onLoginSuccess(profile) {
+  closeLoginModal();
+  updateNavForLogin(profile);
+  showToast('🎉 Welcome, ' + (profile.name || 'किसान भाई') + '!');
+}
+
+function updateNavForLogin(profile) {
+  const dp = profile.dp || localStorage.getItem('kisanai_dp') || '';
+  document.getElementById('nav-login-btn').style.display = 'none';
+  const navUser = document.getElementById('nav-user-avatar');
+  navUser.style.display = 'flex';
+  document.getElementById('nav-user-name').textContent = profile.name || 'Profile';
+  updateAllAvatars(dp);
+}
+
+function updateNavForLogout() {
+  document.getElementById('nav-login-btn').style.display = '';
+  document.getElementById('nav-user-avatar').style.display = 'none';
+}
+
+// ── Profile Page ──────────────────────────────────────────────
+function loadProfilePage() {
+  const profile = JSON.parse(localStorage.getItem('kisanai_user') || '{}');
+  const dp = profile.dp || localStorage.getItem('kisanai_dp') || '';
+
+  document.getElementById('profile-display-name').textContent = profile.name || 'नाम नहीं दिया';
+  document.getElementById('profile-display-phone').textContent = profile.phone ? '+91 ' + profile.phone : '';
+
+  if (dp && dp.startsWith('data:image')) {
+    updateAllAvatars(dp);
+  }
+
+  const fieldsEl = document.getElementById('profile-fields');
+  if (fieldsEl) {
+    fieldsEl.innerHTML = `
+      <div class="profile-field"><label>📱 Phone</label><span>+91 ${profile.phone || '--'}</span></div>
+      <div class="profile-field"><label>👤 नाम</label><span>${profile.name || '--'}</span></div>
+      <div class="profile-field"><label>🏘️ गाँव/शहर</label><span>${profile.village || '--'}</span></div>
+      <div class="profile-field"><label>🗺️ राज्य</label><span>${profile.state || '--'}</span></div>
+    `;
+  }
+  // Pre-fill edit form
+  if (document.getElementById('edit-name'))    document.getElementById('edit-name').value    = profile.name || '';
+  if (document.getElementById('edit-village')) document.getElementById('edit-village').value = profile.village || '';
+  if (document.getElementById('edit-state'))   document.getElementById('edit-state').value   = profile.state || '';
+}
+
+// ── Disease Detection AI ──────────────────────────────────────
+function analyzeCropImage(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = async e => {
+    // Show preview
+    document.getElementById('crop-preview').src = e.target.result;
+    document.getElementById('disease-result').style.display = 'none';
+    document.getElementById('disease-loading').style.display = 'block';
+
+    const base64 = e.target.result.split(',')[1];
+    try {
+      const res = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          model: 'claude-sonnet-4-20250514',
+          max_tokens: 600,
+          messages: [{ role: 'user', content: [
+            { type: 'image', source: { type: 'base64', media_type: file.type, data: base64 } },
+            { type: 'text', text: 'You are KisanAI crop disease expert. Analyze this crop image. Respond ONLY with JSON: {"disease_hindi":"रोग का नाम","disease_eng":"Disease Name","confidence":99,"severity":"high/medium/low","treatment_hindi":["step1","step2","step3"]}. If not a crop/plant, return {"disease_hindi":"फसल नहीं दिखी","disease_eng":"No crop detected","confidence":0,"severity":"low","treatment_hindi":["कृपया फसल की स्पष्ट फोटो लें"]}' }
+          ]}]
+        })
+      });
+      const data = await res.json();
+      const raw = (data.content?.[0]?.text || '{}').replace(/```json|```/g,'').trim();
+      const m = raw.match(/\{[\s\S]*\}/);
+      const result = m ? JSON.parse(m[0]) : null;
+      showDiseaseResult(result);
+    } catch(e) {
+      showDiseaseResult({ disease_hindi:'पहचान नहीं हो सकी', disease_eng:'Detection failed', confidence:0, severity:'low', treatment_hindi:['API key check करें','फिर से try करें'] });
+    }
+  };
+  reader.readAsDataURL(file);
+}
+
+function showDiseaseResult(result) {
+  document.getElementById('disease-loading').style.display = 'none';
+  if (!result) return;
+  document.getElementById('disease-result').style.display = 'block';
+  document.getElementById('disease-name').textContent = result.disease_hindi || 'अज्ञात';
+  document.getElementById('disease-name-en').textContent = result.disease_eng || '';
+  const conf = result.confidence || 0;
+  document.getElementById('conf-pct').textContent = conf + '%';
+  document.getElementById('conf-bar').style.width = conf + '%';
+  document.getElementById('disease-treatment').innerHTML =
+    (result.treatment_hindi || []).map((t,i) => `<div style="display:flex;gap:8px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.05);"><span style="color:#4dc947;font-size:0.8rem;margin-top:2px;">${i+1}.</span>${t}</div>`).join('');
+}
+
+// ── Weather Page ──────────────────────────────────────────────
+function loadWeatherPage() {
+  if (!navigator.geolocation) return;
+  navigator.geolocation.getCurrentPosition(async pos => {
+    const { latitude: lat, longitude: lon } = pos.coords;
+    const OWM_KEY = 'bd5e378503939ddaee76f12ad7a97608';
+    try {
+      // Current weather
+      const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${OWM_KEY}&units=metric`);
+      const w = await res.json();
+      document.getElementById('wp-city').textContent = (w.name || 'आपका शहर') + ', India';
+      document.getElementById('wp-temp').textContent = Math.round(w.main.temp) + '°';
+      document.getElementById('wp-desc').textContent = w.weather?.[0]?.description || '';
+      document.getElementById('wp-humidity').textContent = w.main.humidity + '%';
+      document.getElementById('wp-wind').textContent = Math.round(w.wind.speed * 3.6) + ' km/h';
+      document.getElementById('wp-feels').textContent = Math.round(w.main.feels_like) + '°';
+      document.getElementById('wp-clouds').textContent = w.clouds.all + '%';
+
+      // 5-day forecast
+      const fRes = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${OWM_KEY}&units=metric&cnt=40`);
+      const fData = await fRes.json();
+      const days = {}, icons = {'01d':'☀️','01n':'🌙','02d':'⛅','03d':'☁️','04d':'☁️','09d':'🌧️','10d':'🌦️','11d':'⛈️','13d':'❄️','50d':'🌫️'};
+      (fData.list||[]).forEach(item => {
+        const date = item.dt_txt.split(' ')[0];
+        if (!days[date]) days[date] = item;
+      });
+      const dayLabels = ['आज','कल','परसों','4 दिन','5 दिन'];
+      document.getElementById('wp-forecast').innerHTML = Object.values(days).slice(0,5).map((d,i) => `
+        <div style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:14px 16px;text-align:center;min-width:90px;flex-shrink:0;">
+          <div style="color:rgba(255,255,255,0.5);font-size:0.65rem;margin-bottom:6px;">${dayLabels[i]||'दिन '+(i+1)}</div>
+          <div style="font-size:1.5rem;margin-bottom:4px;">${icons[d.weather?.[0]?.icon?.replace('n','d')]||'⛅'}</div>
+          <div style="color:white;font-weight:800;font-size:0.9rem;">${Math.round(d.main.temp)}°C</div>
+        </div>`).join('');
+
+      // Generate AI advisory based on weather
+      const temp = Math.round(w.main.temp);
+      const rain = w.weather?.[0]?.main === 'Rain';
+      const hum  = w.main.humidity;
+      const advs = [];
+      if (rain) advs.push({i:'🌧️', t:'आज बारिश — छिड़काव और कटाई न करें'});
+      else advs.push({i:'✅', t:'मौसम साफ — कटाई के लिए उपयुक्त दिन'});
+      if (temp > 35) advs.push({i:'⚠️', t:'तापमान बहुत अधिक — सुबह सिंचाई करें'});
+      else if (temp < 15) advs.push({i:'❄️', t:'ठंड अधिक — पाला से फसल बचाएँ'});
+      else advs.push({i:'✅', t:'तापमान खेती के लिए अनुकूल है'});
+      if (hum > 80) advs.push({i:'⚠️', t:'नमी बहुत अधिक — फफूंदनाशक छिड़काव करें'});
+      else advs.push({i:'✅', t:'कीट जोखिम सामान्य — पत्तियाँ जाँचें'});
+      const month = new Date().getMonth()+1;
+      if (month>=10&&month<=12) advs.push({i:'🌾', t:'रबी का मौसम — गेहूँ, सरसों बुवाई का समय'});
+      else if (month>=6&&month<=9) advs.push({i:'🌱', t:'खरीफ मौसम — धान सिंचाई पर ध्यान दें'});
+      document.getElementById('wp-advisory').innerHTML = advs.map(a => `<div style="display:flex;align-items:flex-start;gap:8px;color:rgba(255,255,255,0.8);font-family:var(--font-hindi);font-size:0.85rem;padding:6px 0;"><span>${a.i}</span>${a.t}</div>`).join('');
+    } catch(e) { console.log('Weather error:', e); }
+  }, () => {
+    document.getElementById('wp-city').textContent = 'Location नहीं मिली';
+  });
+}
+
+// ── Toast notification ────────────────────────────────────────
+function shopNotify() {
+  const phone = document.getElementById('shop-notify-phone')?.value.trim();
+  if (!phone || phone.length !== 10) { alert('सही 10 अंक का नंबर डालें'); return; }
+  // Save to localStorage
+  const notifs = JSON.parse(localStorage.getItem('shop_notifs') || '[]');
+  if (!notifs.includes(phone)) notifs.push(phone);
+  localStorage.setItem('shop_notifs', JSON.stringify(notifs));
+  document.getElementById('shop-notify-msg').style.display = 'block';
+  document.getElementById('shop-notify-phone').value = '';
+}
+
+function showToast(msg) {
+  let t = document.getElementById('kisanai-toast');
+  if (!t) {
+    t = document.createElement('div');
+    t.id = 'kisanai-toast';
+    t.style.cssText = 'position:fixed;bottom:28px;left:50%;transform:translateX(-50%);z-index:9999;background:linear-gradient(135deg,#1a4d14,#2d9a27);color:white;padding:12px 24px;border-radius:50px;font-family:var(--font-hindi);font-size:0.88rem;font-weight:700;box-shadow:0 4px 24px rgba(0,0,0,0.4);transition:opacity 0.4s;white-space:nowrap;';
+    document.body.appendChild(t);
+  }
+  t.textContent = msg;
+  t.style.opacity = '1';
+  setTimeout(() => { t.style.opacity = '0'; }, 3000);
+}
+
+// ── Auto-login on page load ───────────────────────────────────
+window.addEventListener('load', () => {
+  const user = JSON.parse(localStorage.getItem('kisanai_user') || 'null');
+  if (user && user.phone && !user.isNew) {
+    updateNavForLogin(user);
+  }
+});
+</script>
 </body>
 </html>
